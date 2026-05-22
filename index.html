@@ -1,502 +1,345 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vision Across Environments and Brains | Mini Symposium</title>
-  <meta name="description" content="A one-page GitHub Pages site for a mini symposium on vision, ecology, action, and brain states." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oxford Vision Group — OxVis</title>
   <style>
-    :root {
-      --bg: #f6f7fb;
-      --panel: rgba(255, 255, 255, 0.88);
-      --text: #132238;
-      --muted: #596579;
-      --line: #d9e0ea;
-      --accent: #2b5fd9;
-      --accent-2: #7d4ff0;
-      --shadow: 0 16px 40px rgba(19, 34, 56, 0.08);
-      --radius: 24px;
-      --max: 1120px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(43,95,217,0.12), transparent 28%),
-        radial-gradient(circle at top right, rgba(125,79,240,0.12), transparent 26%),
-        linear-gradient(180deg, #fbfcff 0%, var(--bg) 100%);
-      line-height: 1.55;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 17px;
+      line-height: 1.65;
     }
 
-    a { color: inherit; text-decoration: none; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    nav {
+      background: #002147;
+      display: flex;
+      align-items: center;
+      padding: 0 2.5rem;
+    }
+    .site-title {
+      color: #c4962a;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 1.1rem 0;
+      flex-shrink: 0;
+    }
+    .tabs { display: flex; margin-left: auto; }
+    .tab {
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      padding: 1.1rem 1.3rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s;
+    }
+    .tab:hover { color: rgba(255,255,255,0.85); }
+    .tab.active { color: #fff; border-bottom-color: #c4962a; }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-      background: rgba(246,247,251,0.7);
-      border-bottom: 1px solid rgba(217,224,234,0.8);
-    }
-    .topbar-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 18px; padding: 14px 0;
-    }
-    .brand { font-weight: 700; letter-spacing: -0.02em; }
-    .nav { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.95rem; color: var(--muted); }
-    .nav a:hover { color: var(--text); }
+    .page { display: none; max-width: 680px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .page.active { display: block; }
 
-    .hero { padding: 56px 0 28px; }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-    .card {
-      background: var(--panel);
-      border: 1px solid rgba(217,224,234,0.9);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .hero-main { padding: 34px; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-    h1 {
-      margin: 0;
-      font-size: clamp(2.35rem, 5vw, 4.4rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-    }
-    .subtitle {
-      margin: 18px 0 0;
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 60ch;
-    }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-    .button {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 12px 18px; border-radius: 999px; font-weight: 600;
-      border: 1px solid var(--line);
-      background: white;
-    }
-    .button.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      border-color: transparent; color: white;
-    }
-    .button:hover { transform: translateY(-1px); transition: 0.2s ease; }
+    h1 { font-size: 1.6rem; font-weight: 600; color: #002147; margin-bottom: 0.9rem; }
+    p { color: #555; margin-bottom: 0.9rem; }
+    p:last-child { margin-bottom: 0; }
 
-    .hero-side { padding: 24px; display: grid; gap: 14px; }
-    .stat {
-      padding: 16px 18px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,0.7);
-    }
-    .stat .k { color: var(--muted); font-size: 0.9rem; }
-    .stat .v { margin-top: 4px; font-size: 1.08rem; font-weight: 650; }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-    .chip {
-      padding: 8px 12px; border-radius: 999px; background: rgba(43,95,217,0.09);
-      color: #284fba; font-size: 0.92rem; font-weight: 600;
-    }
+    /* ── PAST EVENTS ── */
+    .event { padding: 2rem 0; border-bottom: 1px solid #eee; }
+    .event:first-child { padding-top: 0; }
+    .event:last-child { border-bottom: none; }
 
-    section { padding: 22px 0; }
-    .section-head {
-      display: flex; align-items: end; justify-content: space-between; gap: 16px;
-      margin-bottom: 14px;
-    }
-    h2 { margin: 0; font-size: 1.5rem; letter-spacing: -0.03em; }
-    .section-copy { margin: 0; color: var(--muted); max-width: 70ch; }
+    .event-date { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #c4962a; margin-bottom: 0.2rem; }
+    .event-venue { font-size: 0.88rem; color: #999; margin-bottom: 1rem; }
+    .event-theme { font-size: 0.95rem; font-weight: 600; color: #002147; font-style: italic; margin-bottom: 0.9rem; }
 
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .panel { padding: 20px; }
-    .panel h3 { margin: 0 0 10px; font-size: 1.08rem; }
-    .panel p { margin: 0; color: var(--muted); }
+    .talk { display: flex; gap: 1.2rem; padding: 0.55rem 0; border-top: 1px solid #f0f0f0; align-items: baseline; }
+    .talk:first-child { border-top: none; }
+    .talk-time { font-size: 0.75rem; color: #bbb; min-width: 85px; flex-shrink: 0; padding-top: 2px; }
+    .talk-title { font-size: 0.95rem; font-weight: 600; color: #1a1a1a; }
+    .talk-speaker { font-size: 0.85rem; color: #888; margin-top: 0.15rem; }
+    .break { font-size: 0.75rem; color: #ccc; padding: 0.4rem 0; border-top: 1px dashed #f0f0f0; }
 
-    .schedule { display: grid; gap: 16px; }
-    .session {
-      padding: 22px;
-      border-radius: var(--radius);
-      background: var(--panel);
-      border: 1px solid rgba(217,224,234,0.9);
-      box-shadow: var(--shadow);
-    }
-    .session-top {
-      display: flex; justify-content: space-between; gap: 14px; align-items: start; flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-    .session h3 { margin: 0; font-size: 1.2rem; }
-    .session .meta { color: var(--muted); font-size: 0.96rem; }
-    .talks { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-    .talks li {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 12px;
-      align-items: start;
-      padding: 12px 14px;
-      background: rgba(255,255,255,0.76);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-    }
-    .talk-time { font-weight: 700; color: #1d3571; }
-    .talk-title { font-weight: 650; }
-    .talk-note { color: var(--muted); font-size: 0.95rem; }
+    /* ── NEXT MEETING ── */
+    .meeting-meta { margin-bottom: 2rem; }
+    .meeting-meta .date-line { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #c4962a; margin-bottom: 0.2rem; }
+    .meeting-meta .venue-line { font-size: 0.9rem; color: #999; }
 
-    .timeline { display: grid; gap: 12px; }
-    .timeline-item {
-      display: grid; grid-template-columns: 128px 1fr;
-      gap: 16px; padding: 14px 16px; border-radius: 18px;
-      background: rgba(255,255,255,0.75); border: 1px solid var(--line);
-    }
-    .time { font-weight: 700; color: #1d3571; }
-    .role { font-weight: 650; }
-    .small { color: var(--muted); }
+    .programme { border-top: 1px solid #eee; }
 
-    .speaker-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    .slot { border-bottom: 1px solid #eee; }
+    .slot-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      padding: 1.1rem 0;
+      cursor: pointer;
+      user-select: none;
     }
-    .speaker-group { padding: 20px; }
-    .speaker-group h3 { margin: 0 0 10px; }
-    .speaker-group ul { margin: 0; padding-left: 18px; color: var(--muted); }
-    .speaker-group li + li { margin-top: 6px; }
-
-    .footer {
-      padding: 30px 0 44px;
-      color: var(--muted);
-      font-size: 0.95rem;
+    .slot-header:hover .slot-talk-title { color: #002147; }
+    .slot-time { font-size: 0.75rem; color: #bbb; min-width: 85px; flex-shrink: 0; padding-top: 3px; }
+    .slot-main { flex: 1; }
+    .slot-talk-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-
-    @media (max-width: 900px) {
-      .hero-grid, .grid-3, .speaker-grid { grid-template-columns: 1fr; }
-      .talks li, .timeline-item { grid-template-columns: 1fr; gap: 4px; }
+    .chevron {
+      font-size: 0.55rem;
+      color: #bbb;
+      transition: transform 0.2s;
+      flex-shrink: 0;
     }
+    .slot.open .chevron { transform: rotate(90deg); }
+    .slot-speaker { font-size: 0.88rem; color: #888; margin-top: 0.2rem; }
 
-    @media (max-width: 640px) {
-      .hero { padding-top: 26px; }
-      .hero-main { padding: 24px; }
-      .nav { gap: 10px; }
-      .topbar-inner { align-items: start; flex-direction: column; }
-      .section-head { align-items: start; flex-direction: column; }
+    .slot-abstract {
+      display: none;
+      padding: 0 0 1.1rem 100px;
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.7;
+    }
+    .slot.open .slot-abstract { display: block; }
+
+    .slot-break {
+      padding: 0.7rem 0;
+      border-bottom: 1px dashed #eee;
+      font-size: 0.78rem;
+      color: #bbb;
+      display: flex;
+      gap: 1.2rem;
+    }
+    .slot-break-time { min-width: 85px; flex-shrink: 0; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      color: #ccc;
+      border-top: 1px solid #f0f0f0;
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="wrap topbar-inner">
-      <div class="brand">Vision Across Environments and Brains</div>
-      <nav class="nav" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#programme">Programme</a>
-        <a href="#speakers">Speakers</a>
-        <a href="#practical">Practical info</a>
-      </nav>
-    </div>
+
+<nav>
+  <span class="site-title">OxVis</span>
+  <div class="tabs">
+    <button class="tab active" onclick="show('about',this)">About</button>
+    <button class="tab" onclick="show('next',this)">Next meeting</button>
+    <button class="tab" onclick="show('past',this)">Past meetings</button>
+  </div>
+</nav>
+
+<!-- ABOUT -->
+<div class="page active" id="about">
+  <h1>Oxford Vision Group</h1>
+  <p>OxVis brings together researchers across Oxford who are interested in vision. We meet twice a year to share ideas, skills and approaches across disciplines — from ophthalmology and neuroscience to psychology, zoology and computer science.</p>
+  <p>Meetings are held in the Harold Lee Room at Pembroke College or at the Nuffield Department of Clinical Neurosciences at the John Radcliffe Hospital, and typically run from 2–5 pm with a wine reception afterwards.</p>
+</div>
+
+<!-- NEXT MEETING -->
+<div class="page" id="next">
+  <h1>Next meeting</h1>
+
+  <div class="meeting-meta">
+    <div class="date-line">Date TBC — 2025</div>
+    <div class="venue-line">Venue TBC</div>
   </div>
 
-  <main>
-    <header class="hero wrap">
-      <div class="hero-grid">
-        <div class="card hero-main">
-          <div class="eyebrow">Mini symposium draft website</div>
-          <h1>Vision Across Environments and Brains</h1>
-          <p class="subtitle">
-            A one-page symposium site for a compact meeting on ecology of vision, vision and action,
-            and vision and brain states. Easy to host on GitHub Pages and easy to edit.
-          </p>
-          <div class="actions">
-            <a class="button primary" href="#programme">View programme</a>
-            <a class="button" href="#practical">Practical info</a>
-          </div>
-        </div>
+  <div class="programme">
 
-        <aside class="card hero-side" aria-label="Event summary">
-          <div class="stat">
-            <div class="k">Date</div>
-            <div class="v">[Insert date]</div>
-          </div>
-          <div class="stat">
-            <div class="k">Venue</div>
-            <div class="v">[Insert venue]</div>
-          </div>
-          <div class="stat">
-            <div class="k">Format</div>
-            <div class="v">1 keynote + short themed talks</div>
-          </div>
-          <div class="stat">
-            <div class="k">Keynote</div>
-            <div class="v">David Brainard</div>
-          </div>
-          <div class="chips" aria-label="Themes">
-            <span class="chip">Ecology of vision</span>
-            <span class="chip">Vision and action</span>
-            <span class="chip">Brain states</span>
-          </div>
-        </aside>
-      </div>
-    </header>
-
-    <section id="about" class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>About</h2>
-          <p class="section-copy">
-            This symposium brings together work on how vision is shaped by the environment, how it guides action,
-            and how internal brain state influences perception and rehabilitation.
-          </p>
+    <div class="slot" onclick="toggle(this)">
+      <div class="slot-header">
+        <div class="slot-time">2:00–2:30</div>
+        <div class="slot-main">
+          <div class="slot-talk-title"><span class="chevron">&#9658;</span> Session 1</div>
+          <div class="slot-speaker">Speaker Name — Department</div>
         </div>
       </div>
-
-      <div class="grid-3">
-        <div class="card panel">
-          <h3>Ecology of vision</h3>
-          <p>Colour signals, camouflage, underwater optics, and visual constraints in natural environments.</p>
-        </div>
-        <div class="card panel">
-          <h3>Vision and action</h3>
-          <p>Material perception, eye movements, flight, and collision avoidance as parts of active vision.</p>
-        </div>
-        <div class="card panel">
-          <h3>Vision and brain states</h3>
-          <p>Sleep, visual impairment, stroke, binocular vision, and plasticity across the lifespan.</p>
-        </div>
+      <div class="slot-abstract">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
       </div>
-    </section>
-
-    <section id="programme" class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>Programme</h2>
-          <p class="section-copy">
-            A suggested timing structure based on your latest draft. Replace the names or timings as needed.
-          </p>
-        </div>
-      </div>
-
-      <div class="schedule">
-        <div class="session">
-          <div class="session-top">
-            <div>
-              <h3>Star of the Show — David Brainard</h3>
-              <div class="meta">25 minutes total</div>
-            </div>
-            <div class="small">Keynote</div>
-          </div>
-          <p class="section-copy">Suggested opening lecture focusing on colour discrimination and visual science.</p>
-        </div>
-
-        <div class="session">
-          <div class="session-top">
-            <div>
-              <h3>Session 1 — Ecology of Vision / Vision shaped by environment</h3>
-              <div class="meta">Rob Heathcote / Cait Newport · 15 min anchor + 3 × 7 min talks</div>
-            </div>
-            <div class="small">Session 1</div>
-          </div>
-          <ul class="talks">
-            <li>
-              <div class="talk-time">Anchor talk (15 min)</div>
-              <div>
-                <div class="talk-title">Colour signals in prey-predator relationships and camouflage</div>
-                <div class="talk-note">How things appear in the environment.</div>
-              </div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div>
-                <div class="talk-title">Visual constraints in water</div>
-                <div class="talk-note">Cait Newport.</div>
-              </div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div>
-                <div class="talk-title">Underwater optics / optical flow for zebrafish</div>
-                <div class="talk-note">Ecology and motion cues in aquatic vision.</div>
-              </div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div>
-                <div class="talk-title">Additional short talk</div>
-                <div class="talk-note">Placeholder for final speaker.</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="session">
-          <div class="session-top">
-            <div>
-              <h3>Coffee break</h3>
-              <div class="meta">30 minutes</div>
-            </div>
-            <div class="small">Networking</div>
-          </div>
-          <p class="section-copy">A longer break for refreshments, discussion, and informal networking.</p>
-        </div>
-
-        <div class="session">
-          <div class="session-top">
-            <div>
-              <h3>Session 2 — Vision and Action</h3>
-              <div class="meta">Rob Heathcote / Cait Newport · 15 min anchor + 4 × 7 min talks</div>
-            </div>
-            <div class="small">Session 2</div>
-          </div>
-          <ul class="talks">
-            <li>
-              <div class="talk-time">Anchor talk (15 min)</div>
-              <div>
-                <div class="talk-title">Vision and action</div>
-                <div class="talk-note">A framing talk for active visual behaviour.</div>
-              </div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div><div class="talk-title">Material perception</div><div class="talk-note">Takuma.</div></div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div><div class="talk-title">Eye movement</div><div class="talk-note">Sirui.</div></div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div><div class="talk-title">Flight</div><div class="talk-note">Bee flight / action-perception loop.</div></div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div><div class="talk-title">Vision to avoid collision</div><div class="talk-note">Henry Cerbone.</div></div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="session">
-          <div class="session-top">
-            <div>
-              <h3>Session 3 — Vision and Brain States</h3>
-              <div class="meta">Holly Bridge / Stuart Peirson · 15 min anchor + 4 × 7 min talks</div>
-            </div>
-            <div class="small">Session 3</div>
-          </div>
-          <ul class="talks">
-            <li>
-              <div class="talk-time">Anchor talk (15 min)</div>
-              <div>
-                <div class="talk-title">Vision and brain states</div>
-                <div class="talk-note">A session on visual impairments, brain damage, and sleep.</div>
-              </div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div><div class="talk-title">Lazy eye and binocular vision</div><div class="talk-note">Clinical and developmental vision.</div></div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div><div class="talk-title">Vision and stroke</div><div class="talk-note">Rehabilitation and visual function after injury.</div></div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div><div class="talk-title">Brain signals in treatment of lazy eye</div><div class="talk-note">Plasticity and intervention.</div></div>
-            </li>
-            <li>
-              <div class="talk-time">7 min talk</div>
-              <div><div class="talk-title">Sleep</div><div class="talk-note">Brain state and visual processing.</div></div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="speakers" class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>Speakers</h2>
-          <p class="section-copy">Speaker list grouped by session for easy editing.</p>
-        </div>
-      </div>
-
-      <div class="speaker-grid">
-        <div class="card speaker-group">
-          <h3>Ecology of Vision</h3>
-          <ul>
-            <li>David Brainard</li>
-            <li>Cait Newport</li>
-            <li>Anna Ahlberg</li>
-            <li>Dr Sam Matchette</li>
-            <li>Raina Yu</li>
-          </ul>
-        </div>
-        <div class="card speaker-group">
-          <h3>Vision and Action</h3>
-          <ul>
-            <li>Rob Heathcote</li>
-            <li>Takuma</li>
-            <li>Sirui</li>
-            <li>Henry Cerbone</li>
-            <li>Bee-flight speaker (placeholder)</li>
-          </ul>
-        </div>
-        <div class="card speaker-group">
-          <h3>Vision and Brain States</h3>
-          <ul>
-            <li>Holly Bridge</li>
-            <li>Stuart Peirson</li>
-            <li>Dr Rebecca Truby</li>
-            <li>Julien Fars</li>
-            <li>Hanna Willis</li>
-            <li>Lucy Starling</li>
-            <li>Rebecca Willis</li>
-          </ul>
-        </div>
-        <div class="card speaker-group">
-          <h3>General/organising</h3>
-          <ul>
-            <li>Symposium chair: [Insert name]</li>
-            <li>Registration: [Insert email]</li>
-            <li>Venue contact: [Insert email]</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="practical" class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>Practical info</h2>
-          <p class="section-copy">Use this section for the venue, registration deadline, accessibility notes, and travel advice.</p>
-        </div>
-      </div>
-
-      <div class="grid-3">
-        <div class="card panel">
-          <h3>Venue</h3>
-          <p>[Insert room / building / campus details here.]</p>
-        </div>
-        <div class="card panel">
-          <h3>Registration</h3>
-          <p>[Insert registration link or contact email here.]</p>
-        </div>
-        <div class="card panel">
-          <h3>Accessibility</h3>
-          <p>[Add accessibility, dietary, and contact information here.]</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="wrap footer">
-      Built as a static one-page site ready for GitHub Pages. Replace the placeholders and publish.
     </div>
-  </main>
+
+    <div class="slot" onclick="toggle(this)">
+      <div class="slot-header">
+        <div class="slot-time">2:30–3:00</div>
+        <div class="slot-main">
+          <div class="slot-talk-title"><span class="chevron">&#9658;</span> Session 2</div>
+          <div class="slot-speaker">Speaker Name — Department</div>
+        </div>
+      </div>
+      <div class="slot-abstract">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      </div>
+    </div>
+
+    <div class="slot-break">
+      <span class="slot-break-time">3:00–3:30</span>
+      <span>☕ Coffee break</span>
+    </div>
+
+    <div class="slot" onclick="toggle(this)">
+      <div class="slot-header">
+        <div class="slot-time">3:30–4:00</div>
+        <div class="slot-main">
+          <div class="slot-talk-title"><span class="chevron">&#9658;</span> Session 3</div>
+          <div class="slot-speaker">Speaker Name — Department</div>
+        </div>
+      </div>
+      <div class="slot-abstract">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      </div>
+    </div>
+
+    <div class="slot-break">
+      <span class="slot-break-time">4:30–</span>
+      <span>🍷 Wine reception</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAST MEETINGS -->
+<div class="page" id="past">
+  <h1>Past meetings</h1>
+
+  <div class="event">
+    <div class="event-date">14 October 2019</div>
+    <div class="event-venue">Harold Lee Room, Pembroke College</div>
+    <div class="talk"><div class="talk-time">2:00–2:30</div><div><div class="talk-title">The neurochemistry of the human visual cortex during functional processing</div><div class="talk-speaker">Betina Ip — Physiology, Anatomy & Genetics</div></div></div>
+    <div class="talk"><div class="talk-time">2:30–3:00</div><div><div class="talk-title">TBD</div><div class="talk-speaker">Hannah Dury — OFTNAI</div></div></div>
+    <div class="break">☕ Coffee — 3:00–3:30</div>
+    <div class="talk"><div class="talk-time">3:30–4:00</div><div><div class="talk-title">A case of simultanagnosia after bilateral occipital damage</div><div class="talk-speaker">Kathleen Vancleef — Experimental Psychology</div></div></div>
+    <div class="talk"><div class="talk-time">4:00–4:30</div><div><div class="talk-title">How do we know where we stand: judging and discriminating eye-height</div><div class="talk-speaker">Brian Rogers — Experimental Psychology</div></div></div>
+    <div class="break">🍷 Wine reception — 4:30 onwards</div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">25 March 2019</div>
+    <div class="event-venue">Harold Lee Room, Pembroke College</div>
+    <div class="talk"><div class="talk-time">2:30–3:00</div><div><div class="talk-title">Update on enhanced electronic vision</div><div class="talk-speaker">Iain Wilson — Nuffield Laboratory of Ophthalmology</div></div></div>
+    <div class="talk"><div class="talk-time">3:00–3:30</div><div><div class="talk-title">Genome engineering for inherited retinal degeneration</div><div class="talk-speaker">Lewis Fry — Nuffield Department of Clinical Neurosciences</div></div></div>
+    <div class="break">☕ Coffee — 3:30–3:45</div>
+    <div class="talk"><div class="talk-time">3:45–4:15</div><div><div class="talk-title">Adaptive optics and the retina</div><div class="talk-speaker">Mital Shah — Nuffield Laboratory of Ophthalmology</div></div></div>
+    <div class="talk"><div class="talk-time">4:15–5:00</div><div><div class="talk-title">Seeing double: twin studies and the genetic epidemiology of common eye diseases</div><div class="talk-speaker">Chris Hammond — King's College London</div></div></div>
+    <div class="break">🍷 Wine reception — 5:00 onwards</div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">8 October 2018</div>
+    <div class="event-venue">Harold Lee Room, Pembroke College</div>
+    <div class="talk"><div class="talk-time">2:00–2:30</div><div><div class="talk-title">Identifying surface colours across environmental illuminations</div><div class="talk-speaker">Takuma Morimoto — Oxford Perception Lab</div></div></div>
+    <div class="talk"><div class="talk-time">2:30–3:00</div><div><div class="talk-title">Colour-shape correspondences and emotional mediation effects</div><div class="talk-speaker">Noemi Dreksler — Cross-modal Perception Lab</div></div></div>
+    <div class="break">☕ Coffee — 3:00–3:30</div>
+    <div class="talk"><div class="talk-time">3:30–4:00</div><div><div class="talk-title">Patterns of dissociation in visuospatial neglect</div><div class="talk-speaker">Margaret Moore — Oxford Cognitive Neuropsychology Centre</div></div></div>
+    <div class="talk"><div class="talk-time">4:00–4:30</div><div><div class="talk-title">Robots thinking fast and slow</div><div class="talk-speaker">Ingmar Posner — Applied AI Lab</div></div></div>
+    <div class="break">🍷 Wine reception — 4:30 onwards</div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">5 March 2018</div>
+    <div class="event-venue">Harold Lee Room, Pembroke College</div>
+    <div class="talk"><div class="talk-time">2:00–2:30</div><div><div class="talk-title">Microperimetry optimisation and evolution</div><div class="talk-speaker">Jasleen Jolly — Nuffield Laboratory of Ophthalmology</div></div></div>
+    <div class="talk"><div class="talk-time">2:30–3:00</div><div><div class="talk-title">Antidepressants, retina function and melanopsin driven light responses</div><div class="talk-speaker">Steven Hughes — Nuffield Department of Clinical Neurosciences</div></div></div>
+    <div class="break">☕ Coffee — 3:00–3:15</div>
+    <div class="talk"><div class="talk-time">3:15–3:45</div><div><div class="talk-title">A generalisation theory of spike time relativity</div><div class="talk-speaker">James Isbister — OFTNAI</div></div></div>
+    <div class="talk"><div class="talk-time">3:45–4:15</div><div><div class="talk-title">Disparity, parallax and perspective in the perception of natural scenes</div><div class="talk-speaker">Brian Rogers — Experimental Psychology</div></div></div>
+    <div class="break">🍷 Wine reception — 4:15 onwards</div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">7 November 2016</div>
+    <div class="event-venue">Harold Lee Room, Pembroke College</div>
+    <div class="talk"><div class="talk-time">2:00–2:30</div><div><div class="talk-title">Robust sampling of decision information during perceptual choice</div><div class="talk-speaker">Hildward Vandormael — Experimental Psychology</div></div></div>
+    <div class="talk"><div class="talk-time">2:30–3:00</div><div><div class="talk-title">Melanopsin sensitivity in the human visual system</div><div class="talk-speaker">Manuel Spitschan — University of Pennsylvania</div></div></div>
+    <div class="break">☕ Coffee — 3:00–3:30</div>
+    <div class="talk"><div class="talk-time">3:30–3:50</div><div><div class="talk-title">Collective navigation in homing pigeons</div><div class="talk-speaker">Takao Sasaki — Zoology</div></div></div>
+    <div class="talk"><div class="talk-time">3:50–4:10</div><div><div class="talk-title">Illuminant estimation and its application to #TheDress</div><div class="talk-speaker">Takuma Morimoto — Experimental Psychology</div></div></div>
+    <div class="talk"><div class="talk-time">4:10–4:40</div><div><div class="talk-title">High-resolution retinal imaging with an AOSLO</div><div class="talk-speaker">Laura Young — Experimental Psychology</div></div></div>
+    <div class="break">🍷 Wine reception — 4:40 onwards</div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">7 March 2016</div>
+    <div class="event-venue">NDCN, John Radcliffe Hospital</div>
+    <div class="talk"><div class="talk-time">2:00–2:30</div><div><div class="talk-title">The contribution of the midbrain to motion perception</div><div class="talk-speaker">Paul Azzopardi — Experimental Psychology</div></div></div>
+    <div class="talk"><div class="talk-time">2:30–3:00</div><div><div class="talk-title">Vision restoration using melanopsin gene therapy in end-stage retinitis pigmentosa</div><div class="talk-speaker">Alun Barnard — Nuffield Laboratory of Ophthalmology</div></div></div>
+    <div class="break">☕ Coffee — 3:00–3:30</div>
+    <div class="talk"><div class="talk-time">3:30–3:40</div><div><div class="talk-title">Exploiting visual learning rules in cognitive bias modification</div><div class="talk-speaker">Hannah Dury — Experimental Psychology</div></div></div>
+    <div class="talk"><div class="talk-time">3:40–3:50</div><div><div class="talk-title">Is encoding into visual working memory a serial process?</div><div class="talk-speaker">Edwin Dalmaijer — NDCN / Experimental Psychology</div></div></div>
+    <div class="talk"><div class="talk-time">3:50–4:00</div><div><div class="talk-title">A bias-free measure of motion adaptation reveals individual differences</div><div class="talk-speaker">Anna-Katharina Hauperich — Experimental Psychology</div></div></div>
+    <div class="talk"><div class="talk-time">4:00–4:30</div><div><div class="talk-title">The integration of visual and non-visual signals for perception in primates</div><div class="talk-speaker">Kristine Krug — Physiology, Anatomy & Genetics</div></div></div>
+    <div class="break">🍷 Wine reception — 4:30 onwards</div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">9 March 2015</div>
+    <div class="event-venue">John Radcliffe Hospital</div>
+    <div class="event-theme">Clinical Training Session</div>
+    <div class="talk"><div class="talk-time">2:00–2:45</div><div><div class="talk-title">Electronic retinal implant</div><div class="talk-speaker">Thomas Edwards — Nuffield Laboratory of Ophthalmology</div></div></div>
+    <div class="talk"><div class="talk-time">2:45–3:30</div><div><div class="talk-title">Interhemispheric transfer of visual homing routes in pigeons</div><div class="talk-speaker">Antone Martinho III & Alex Kacelnik — Zoology</div></div></div>
+    <div class="break">☕ Coffee — 3:30–3:45</div>
+    <div class="talk"><div class="talk-time">3:45–4:30</div><div><div class="talk-title">Do we adapt to the variance of the visual signal?</div><div class="talk-speaker">Hannah Smithson — Experimental Psychology</div></div></div>
+    <div class="break">🍷 Wine reception — 4:30 onwards</div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">11 November 2014</div>
+    <div class="event-venue">Pembroke College</div>
+    <div class="event-theme">The clinical assessment and rehabilitation of deficits to vision: from the retina to the cortex</div>
+    <div class="talk"><div class="talk-time">2:00–2:30</div><div><div class="talk-title">Assessing common retinal deficits to vision</div><div class="talk-speaker">Susan Downes — Nuffield Laboratory of Ophthalmology</div></div></div>
+    <div class="talk"><div class="talk-time">2:30–3:00</div><div><div class="talk-title">Smart specs — assessing the benefit of a low vision intervention</div><div class="talk-speaker">Joram van Rheede — Division of Clinical Neurology</div></div></div>
+    <div class="break">☕ Coffee — 3:00–3:15</div>
+    <div class="talk"><div class="talk-time">3:15–3:45</div><div><div class="talk-title">Assessing common cortical deficits to vision</div><div class="talk-speaker">Glyn Humphreys — Cognitive Neuropsychology Centre</div></div></div>
+    <div class="talk"><div class="talk-time">3:45–4:15</div><div><div class="talk-title">Training the visual cortex: can rehabilitation help the cortically blind to see?</div><div class="talk-speaker">Holly Bridge — FMRIB</div></div></div>
+    <div class="break">🍷 Wine reception — 4:15 onwards</div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">11 March 2014</div>
+    <div class="event-venue">Pembroke College</div>
+    <div class="talk"><div class="talk-time"></div><div><div class="talk-title">The eyes have it: neurophysiological markers for Parkinson's disease</div><div class="talk-speaker">Chrystalina Antoniades — NDCN</div></div></div>
+    <div class="talk"><div class="talk-time"></div><div><div class="talk-title">The neural representation of object shape in the primate ventral visual system</div><div class="talk-speaker">Akihiro Eguchi — OCTANI</div></div></div>
+    <div class="talk"><div class="talk-time"></div><div><div class="talk-title">Head-centred receptive fields in parietal areas</div><div class="talk-speaker">Bedeho Mender — OCTANI</div></div></div>
+    <div class="talk"><div class="talk-time"></div><div><div class="talk-title">Yellow or blue filters can help some dyslexic children to learn to read</div><div class="talk-speaker">John Stein — Anatomy, Physiology & Genetics</div></div></div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">28 November 2013</div>
+    <div class="event-venue">Pembroke College</div>
+    <div class="event-theme">Networking meeting</div>
+  </div>
+
+</div>
+
+<footer>Oxford Vision Group · Department of Experimental Psychology, University of Oxford</footer>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0 });
+  }
+  function toggle(slot) {
+    slot.classList.toggle('open');
+  }
+</script>
 </body>
 </html>
