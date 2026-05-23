@@ -37,7 +37,7 @@
     .event:last-of-type { border-bottom: none; }
     .event-date { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #c4962a; margin-bottom: 0.2rem; }
     .event-venue { font-size: 0.95rem; color: #555; margin-bottom: 1rem; }
-    .event-theme { font-size: 1rem; font-weight: 700; color: #002147; font-style: italic; margin-bottom: 0.9rem; }
+    .event-theme { font-size: 1rem; font-weight: 700; color: #002147;  margin-bottom: 0.9rem; }
     .talk { display: flex; gap: 1.2rem; padding: 0.65rem 0; border-top: 1px solid #e8e5e0; align-items: baseline; }
     .talk:first-child { border-top: none; }
     .talk-time { font-size: 0.8rem; color: #777; min-width: 90px; flex-shrink: 0; padding-top: 2px; }
@@ -51,45 +51,31 @@
 <nav>
   <span class="site-title">OxVis</span>
   <div class="tabs">
-    <button class="tab active" onclick="show('about',this)">About</button>
-    <button class="tab" onclick="show('next',this)">Next meeting</button>
-    <button class="tab" onclick="show('past',this)">Past meetings</button>
+    <button class="tab active" onclick="show('about',this)">ABOUT</button>
+    <button class="tab" onclick="show('next',this)">NEXT MEETING</button>
+    <button class="tab" onclick="show('past',this)">PAST MEETINGS</button>
   </div>
 </nav>
 
 <!-- ABOUT -->
 <div class="page active" id="about">
   <div class="about-inner">
-    <h1 class="rolling-title">
-  Oxford Vision Group
-  <span class="dial-wrapper">
-    <span class="dial-track">
-      <span class="dial-word">environment</span>
-      <span class="dial-word">eye</span>
-      <span class="dial-word">brain</span>
-      <span class="dial-word">environment</span>
-    </span>
-  </span>
-</h1>
+    <h1>Oxford Vision Group</h1>
+<div class="dial-wrapper">
+  <div class="dial-track">
+    <span class="dial-word">Environment</span>
+    <span class="dial-word">Eye</span>
+    <span class="dial-word">Brain</span>
+    <span class="dial-word">Environment</span>
+  </div>
+</div>
 
 <style>
-  .rolling-title {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #002147;
-    margin-bottom: 1rem;
-  }
   .dial-wrapper {
-    display: inline-block;
     overflow: hidden;
-    height: 1.2em;
-    vertical-align: middle;
-    position: relative;
-    top: -0.05em;
+    height: 1.4em;
+    margin-bottom: 1.2rem;
+    margin-top: -0.5rem;
   }
   .dial-track {
     display: flex;
@@ -98,20 +84,20 @@
   }
   .dial-word {
     display: block;
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #c4962a;
-    line-height: 1.2em;
-    white-space: nowrap;
+    line-height: 1.4em;
+    
   }
   @keyframes dial-roll {
     0%   { transform: translateY(0); }
     20%  { transform: translateY(0); }
-    33%  { transform: translateY(-1.2em); }
-    53%  { transform: translateY(-1.2em); }
-    66%  { transform: translateY(-2.4em); }
-    86%  { transform: translateY(-2.4em); }
-    100% { transform: translateY(-3.6em); }
+    33%  { transform: translateY(-1.4em); }
+    53%  { transform: translateY(-1.4em); }
+    66%  { transform: translateY(-2.8em); }
+    86%  { transform: translateY(-2.8em); }
+    100% { transform: translateY(-4.2em); }
   }
 </style>
     <div class="about-layout">
@@ -125,7 +111,7 @@
     </div>
     <div class="form-box">
       <p>Please help us plan by expressing your interest by <strong>Friday 29 May</strong>.</p>
-      <p><a href="https://forms.cloud.microsoft/e/xfKqParA5P" target="_blank">Oxford Vision Group: Expression of Interest — fill in the form →</a></p>
+      <iframe width="640px" height="480px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=G96VzPWXk0-0uv5ouFLPkZ9556BJ5V5OrdXqoK1zFAhUNkxIVjdOMlhSUUU3TUxVWEJCQzI2MThWSi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh; margin-top:1rem; display:block;" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -136,11 +122,11 @@
     <h1>Next meeting</h1>
     <div class="meeting-meta">
       <div class="date-line">Friday 26 June 2025, 2:00–5:00 pm</div>
-      <div class="venue-line">Venue TBC</div>
+      <div class="venue-line">Life and Mind Building, University of Oxford</div>
     </div>
     <div class="form-box">
       <p>Please help us plan by expressing your interest by <strong>Friday 29 May</strong>.</p>
-      <p><a href="https://forms.cloud.microsoft/e/xfKqParA5P" target="_blank">Oxford Vision Group: Expression of Interest — fill in the form →</a></p>
+      <iframe width="640px" height="480px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=G96VzPWXk0-0uv5ouFLPkZ9556BJ5V5OrdXqoK1zFAhUNkxIVjdOMlhSUUU3TUxVWEJCQzI2MThWSi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh; margin-top:1rem; display:block;" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -249,7 +235,7 @@
   </div>
 </div>
 
-<footer>Oxford Vision Group · Department of Experimental Psychology, University of Oxford</footer>
+<footer>Oxford Vision Group</footer>
 <script>
   function show(id, btn) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -257,6 +243,10 @@
     document.getElementById(id).classList.add('active');
     btn.classList.add('active');
     window.scrollTo({ top: 0 });
+    // Reload any iframes in the newly shown tab so Microsoft Forms loads reliably
+    document.getElementById(id).querySelectorAll('iframe').forEach(function(f) {
+      f.src = f.src;
+    });
   }
   function toggle(slot) { slot.classList.toggle('open'); }
 </script>
